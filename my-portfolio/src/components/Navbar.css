@@ -1,0 +1,234 @@
+/* Navbar.css - Modern, responsive navbar inspired by JavaScript Mastery */
+
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --accent-color: #64ffda;
+  --transition: all 0.3s ease;
+  --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  background: rgba(10, 10, 10, 0.95);
+}
+
+.logo a {
+  font-size: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text-primary);
+  letter-spacing: 2px;
+}
+.logo span{
+  font-size: 15px;
+}
+
+.logo span {
+  color: var(--accent-color);
+}
+.logo span {
+  font-size: 2rem;    /* Adjust this value as needed */
+  display: inline-block;
+  transform: scale(1.2); /* Optional: scales without affecting layout */
+  line-height: 1;
+   font-size: 3rem;
+  color: #64ffda;        /* Your accent color */
+  text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+  margin-left: 2px;  
+}
+
+
+/* Desktop Navigation */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: var(--transition);
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.nav-links a:hover {
+  color: var(--accent-color);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--accent-color);
+  transition: var(--transition);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hamburger Icon */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: var(--text-primary);
+  margin: 3px 0;
+  transition: var(--transition);
+  border-radius: 5px;
+}
+
+/* Hamburger Open Animation */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 70%;
+  max-width: 300px;
+  height: 100vh;
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow);
+  padding: 6rem 2rem 2rem;
+  z-index: 1050;
+}
+
+.mobile-nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.mobile-nav-links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 1.3rem;
+  font-weight: 500;
+  transition: var(--transition);
+  display: block;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav-links a:hover {
+  color: var(--accent-color);
+  padding-left: 10px;
+}
+
+/* Backdrop overlay (optional, can be added via component) */
+/* If you want to add an overlay, you can include a separate div in the component */
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+   .logo span {
+    font-size: 2rem;
+  }
+  .hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .logo a {
+    font-size: 1.5rem;
+  }
+
+  .mobile-menu {
+    width: 80%;
+    padding: 5rem 1.5rem;
+  }
+}
+/* Add to Navbar.css */
+.nav-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.nav-btn:hover {
+  color: var(--accent-color);
+}
+
+.nav-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--accent-color);
+  transition: var(--transition);
+}
+
+.nav-btn:hover::after {
+  width: 100%;
+}
+
+/* Mobile nav buttons */
+.mobile-nav-links .nav-btn {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  padding: 0.5rem 0;
+  width: 100%;
+  text-align: left;
+}

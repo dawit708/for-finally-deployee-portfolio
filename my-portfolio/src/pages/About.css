@@ -1,0 +1,305 @@
+/* About.css - Professional Portfolio Style */
+
+.about {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  color: #ffffff;
+  padding: 6rem 2rem 4rem;
+  overflow: hidden;
+}
+
+.sphere-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.about-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #64ffda;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+}
+
+.section-subtitle {
+  font-size: 1.3rem;
+  color: #b0b0b0;
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Bento Grid Layout */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.8rem;
+  margin-top: 2rem;
+}
+
+/* Base Card Styles */
+.bento-card {
+  background: rgba(20, 20, 30, 0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 2rem;
+  border: 1px solid rgba(100, 255, 218, 0.15);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 15px 35px -15px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Card Hover Effect */
+.bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(100, 255, 218, 0.1),
+    transparent
+  );
+  transition: left 0.7s ease;
+}
+
+.bento-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: #64ffda;
+  box-shadow: 0 30px 50px -20px rgba(100, 255, 218, 0.3);
+}
+
+.bento-card:hover::before {
+  left: 100%;
+}
+
+/* Card Typography */
+.bento-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  color: #64ffda;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bento-card p {
+  color: #e0e0e0;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+/* Bio Card Specific */
+.card-bio {
+  grid-column: span 2;
+  grid-row: span 1;
+  background: linear-gradient(145deg, rgba(30, 30, 40, 0.8), rgba(20, 20, 30, 0.9));
+}
+
+.bio-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #d0d0d0;
+}
+
+/* Skills Card */
+.card-skills {
+  grid-column: span 1;
+  grid-row: span 2;
+  background: linear-gradient(145deg, rgba(30, 30, 40, 0.8), rgba(20, 20, 30, 0.9));
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+}
+
+.skills-list li {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+  transition: all 0.3s ease;
+}
+
+.skills-list li:hover {
+  color: #64ffda;
+  transform: translateX(5px);
+  border-bottom-color: #64ffda;
+}
+
+.skills-list li::before {
+  content: "▹";
+  color: #64ffda;
+  font-size: 1.2rem;
+}
+
+/* Stat Cards (Experience & Projects) */
+.card-exp, .card-projects {
+  text-align: center;
+  background: linear-gradient(145deg, rgba(30, 30, 40, 0.8), rgba(20, 20, 30, 0.9));
+}
+
+.stat-number {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #64ffda;
+  line-height: 1;
+  margin: 1rem 0 0.5rem;
+  text-shadow: 0 0 30px rgba(100, 255, 218, 0.5);
+}
+
+.card-exp p:last-child, .card-projects p:last-child {
+  color: #a0a0a0;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Location Card */
+.card-location {
+  background: linear-gradient(145deg, rgba(30, 30, 40, 0.8), rgba(20, 20, 30, 0.9));
+}
+
+.card-location p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.tiny {
+  font-size: 0.85rem;
+  color: #64ffda;
+  opacity: 0.8;
+}
+
+/* Fun Fact Card */
+.card-fun {
+  grid-column: span 2;
+  background: linear-gradient(145deg, rgba(30, 30, 40, 0.8), rgba(20, 20, 30, 0.9));
+}
+
+.card-fun p {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #d0d0d0;
+  background: rgba(100, 255, 218, 0.05);
+  padding: 1rem;
+  border-radius: 12px;
+  border-left: 3px solid #64ffda;
+}
+
+/* Grid Spans */
+.card-bio { grid-column: span 2; grid-row: span 1; }
+.card-skills { grid-column: span 1; grid-row: span 2; }
+.card-exp { grid-column: span 1; grid-row: span 1; }
+.card-projects { grid-column: span 1; grid-row: span 1; }
+.card-location { grid-column: span 1; grid-row: span 1; }
+.card-fun { grid-column: span 2; grid-row: span 1; }
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 3rem;
+  }
+
+  .card-bio,
+  .card-fun {
+    grid-column: span 2;
+  }
+
+  .card-skills {
+    grid-row: span 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: 5rem 1rem 3rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .bento-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .card-bio,
+  .card-skills,
+  .card-exp,
+  .card-projects,
+  .card-location,
+  .card-fun {
+    grid-column: span 1;
+  }
+
+  .bento-card {
+    padding: 1.8rem;
+  }
+
+  .bento-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .stat-number {
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+  }
+
+  .bento-card {
+    padding: 1.5rem;
+  }
+
+  .stat-number {
+    font-size: 3rem;
+  }
+}
