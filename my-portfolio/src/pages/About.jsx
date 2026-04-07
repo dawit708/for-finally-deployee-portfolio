@@ -75,7 +75,7 @@ const About = () => {
           {/* Card 3 - Experience */}
           <div className="bento-card card-exp">
             <h3>💼 Experience</h3>
-            <p className="stat-number">1+</p>
+            <p className="stat-number">2+</p>
             <p>Years in web development</p>
           </div>
 

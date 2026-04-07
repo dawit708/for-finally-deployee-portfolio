@@ -1,116 +1,229 @@
-/* Navbar.css - Modern, responsive navbar inspired by JavaScript Mastery */
-
-:root {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #111111;
-  --text-primary: #ffffff;
-  --text-secondary: #b0b0b0;
-  --accent-color: #64ffda;
-  --transition: all 0.3s ease;
-  --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
-}
-
+/* Navbar.css */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Theme Variables */
+:root {
+  --transition-speed: 0.3s;
+}
+
+/* Light Mode (Default) */
+body.light-mode {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #1a1a2e;
+  --text-secondary: #16213e;
+  --navbar-bg: rgba(255, 255, 255, 0.95);
+  --navbar-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --btn-bg: #f0f0f0;
+  --btn-hover: #e0e0e0;
+  --active-color: #667eea;
+  --gradient-start: #667eea;
+  --gradient-end: #764ba2;
+  --border-color: #e1e8ed;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --navbar-bg: rgba(10, 10, 10, 0.95);
+  --navbar-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --btn-bg: #2a2a2a;
+  --btn-hover: #3a3a3a;
+  --active-color: #667eea;
+  --gradient-start: #667eea;
+  --gradient-end: #764ba2;
+  --border-color: #2a2a2a;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* Navbar Container */
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  position: sticky;
-  top: 0;
+  padding: 1rem 5%;
   z-index: 1000;
-  box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
-  background: rgba(10, 10, 10, 0.95);
+  transition: all var(--transition-speed) ease;
+  box-shadow: var(--navbar-shadow);
 }
 
-.logo a {
-  font-size: 2rem;
-  font-weight: 700;
-  text-decoration: none;
+.navbar.light-nav {
+  background: var(--navbar-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.navbar.dark-nav {
+  background: var(--navbar-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Logo Styles */
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo span {
+  background: linear-gradient(135deg, #ff6b6b, #feca57);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: var(--btn-bg);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-right: 1rem;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(15deg);
+  background: var(--btn-hover);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.theme-icon {
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.moon-icon {
+  color: #f0f0f0;
+  text-shadow: 0 0 10px rgba(240, 240, 240, 0.5);
+}
+
+.sun-icon {
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Tooltip for theme toggle */
+.theme-toggle::before {
+  content: "Click: Toggle | Double Click: Light Mode";
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--btn-bg);
   color: var(--text-primary);
-  letter-spacing: 2px;
-}
-.logo span{
-  font-size: 15px;
-}
-
-.logo span {
-  color: var(--accent-color);
-}
-.logo span {
-  font-size: 2rem;    /* Adjust this value as needed */
-  display: inline-block;
-  transform: scale(1.2); /* Optional: scales without affecting layout */
-  line-height: 1;
-   font-size: 3rem;
-  color: #64ffda;        /* Your accent color */
-  text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
-  margin-left: 2px;  
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1001;
+  box-shadow: var(--navbar-shadow);
 }
 
+.theme-toggle:hover::before {
+  opacity: 1;
+}
 
-/* Desktop Navigation */
+/* Navigation Links Desktop */
 .nav-links {
   display: flex;
-  list-style: none;
   gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-links a {
-  text-decoration: none;
-  color: var(--text-secondary);
+.nav-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
   font-weight: 500;
-  font-size: 1.1rem;
-  transition: var(--transition);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
   position: relative;
-  padding: 0.5rem 0;
+  color: var(--text-primary);
 }
 
-.nav-links a:hover {
-  color: var(--accent-color);
-}
-
-.nav-links a::after {
+.nav-btn::before {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 0%;
   height: 2px;
-  background: var(--accent-color);
-  transition: var(--transition);
+  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+  transition: width 0.3s ease;
 }
 
-.nav-links a:hover::after {
-  width: 100%;
+.nav-btn:hover::before,
+.nav-btn.active::before {
+  width: 80%;
 }
 
-/* Hamburger Icon */
+.nav-btn:hover {
+  color: var(--active-color);
+  transform: translateY(-2px);
+}
+
+.nav-btn.active {
+  color: var(--active-color);
+  font-weight: 600;
+}
+
+/* Hamburger Menu */
 .hamburger {
   display: none;
   flex-direction: column;
   cursor: pointer;
-  z-index: 1100;
+  z-index: 1001;
 }
 
 .hamburger span {
-  height: 3px;
   width: 25px;
+  height: 3px;
   background: var(--text-primary);
   margin: 3px 0;
-  transition: var(--transition);
-  border-radius: 5px;
+  transition: all 0.3s ease;
+  border-radius: 2px;
 }
 
-/* Hamburger Open Animation */
 .hamburger.open span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
@@ -120,7 +233,7 @@
 }
 
 .hamburger.open span:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -6px);
+  transform: rotate(-45deg) translate(7px, -7px);
 }
 
 /* Mobile Menu */
@@ -128,107 +241,150 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 70%;
-  max-width: 300px;
+  width: 80%;
+  max-width: 350px;
   height: 100vh;
-  background: var(--bg-secondary);
-  box-shadow: var(--shadow);
-  padding: 6rem 2rem 2rem;
-  z-index: 1050;
+  z-index: 999;
+  padding: 80px 2rem 2rem;
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-menu.light-mobile {
+  background: var(--bg-primary);
+  border-left: 1px solid var(--border-color);
+}
+
+.mobile-menu.dark-mobile {
+  background: var(--bg-primary);
+  border-left: 1px solid var(--border-color);
 }
 
 .mobile-nav-links {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
-.mobile-nav-links a {
-  text-decoration: none;
-  color: var(--text-secondary);
-  font-size: 1.3rem;
-  font-weight: 500;
-  transition: var(--transition);
-  display: block;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.mobile-nav-links .nav-btn {
+  width: 100%;
+  text-align: left;
+  font-size: 1.2rem;
+  padding: 0.75rem;
 }
 
-.mobile-nav-links a:hover {
-  color: var(--accent-color);
-  padding-left: 10px;
-}
-
-/* Backdrop overlay (optional, can be added via component) */
-/* If you want to add an overlay, you can include a separate div in the component */
-
-/* Media Queries */
+/* Responsive Design */
 @media (max-width: 768px) {
   .nav-links {
     display: none;
   }
 
-   .logo span {
-    font-size: 2rem;
-  }
   .hamburger {
     display: flex;
   }
-}
 
-@media (max-width: 480px) {
-  .navbar {
-    padding: 1rem;
-  }
-
-  .logo a {
+  .logo {
     font-size: 1.5rem;
   }
 
-  .mobile-menu {
-    width: 80%;
-    padding: 5rem 1.5rem;
+  .theme-toggle {
+    margin-right: 1rem;
+    margin-left: auto;
+  }
+
+  .navbar {
+    padding: 0.8rem 5%;
   }
 }
-/* Add to Navbar.css */
-.nav-btn {
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  font-size: 1.1rem;
-  font-weight: 500;
-  cursor: pointer;
-  padding: 0.5rem 0;
-  position: relative;
-  transition: var(--transition);
-  font-family: inherit;
+
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .nav-links {
+    gap: 1rem;
+  }
+  
+  .nav-btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+  }
 }
 
-.nav-btn:hover {
-  color: var(--accent-color);
+/* Scroll Animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-.nav-btn::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background: var(--accent-color);
-  transition: var(--transition);
+.navbar {
+  animation: slideDown 0.5s ease-out;
 }
 
-.nav-btn:hover::after {
-  width: 100%;
+/* Glassmorphism Effect for Modern Browsers */
+@supports (backdrop-filter: blur(10px)) {
+  .navbar {
+    backdrop-filter: blur(10px);
+  }
 }
 
-/* Mobile nav buttons */
-.mobile-nav-links .nav-btn {
-  font-size: 1.3rem;
-  color: var(--text-secondary);
-  padding: 0.5rem 0;
-  width: 100%;
-  text-align: left;
+/* Smooth Theme Transition */
+body, .navbar, .nav-btn, .theme-toggle, .logo {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hover Effects for Desktop */
+@media (hover: hover) {
+  .nav-btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  .theme-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+  }
+}
+
+/* Active Ripple Effect */
+.nav-btn:active,
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Custom Scrollbar for Dark/Light Mode */
+body.light-mode::-webkit-scrollbar {
+  width: 10px;
+}
+
+body.light-mode::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+body.light-mode::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 5px;
+}
+
+body.dark-mode::-webkit-scrollbar {
+  width: 10px;
+}
+
+body.dark-mode::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 5px;
+}
+
+/* Focus Styles for Accessibility */
+.nav-btn:focus-visible,
+.theme-toggle:focus-visible,
+.hamburger:focus-visible {
+  outline: 2px solid var(--active-color);
+  outline-offset: 2px;
 }

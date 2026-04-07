@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Canvas, useLoader } from '@react-three/fiber';
@@ -18,6 +17,7 @@ const Contact = () => {
   });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState({ type: '', message: '' });
+  const [useWeb3Forms, setUseWeb3Forms] = useState(false); // Fallback toggle
 
   // 3D Texture loading
   const earthMap = useLoader(TextureLoader, earthTexture);
@@ -26,28 +26,84 @@ const Contact = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  // Web3Forms submission
+  const submitToWeb3Forms = async (formData) => {
+    const web3FormData = new FormData();
+    web3FormData.append("name", formData.name);
+    web3FormData.append("email", formData.email);
+    web3FormData.append("message", formData.message);
+    web3FormData.append("access_key", "921fbc78-55ce-4982-b9e3-bc6bbeb7f3f3");
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: web3FormData
+    });
+
+    const data = await response.json();
+    return data.success;
+  };
+
+  // EmailJS submission
+  const submitToEmailJS = async () => {
+    try {
+      await emailjs.sendForm(
+        'service_9xrmjuc',
+        'template_dm0mpka',
+        formRef.current,
+        'yIlTZ7wRy6pysn3Mb'
+      );
+      return true;
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      return false;
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setStatus({ type: '', message: '' });
 
-    // We use sendForm to automatically grab the values from formRef.current
-    emailjs.sendForm(
-      'service_9xrmjuc', 
-      'template_dm0mpka', 
-      formRef.current, 
-      'yIlTZ7wRy6pysn3Mb'
-    )
-      .then(() => {
-        setLoading(false);
+    let success = false;
+
+    // Try EmailJS first if not using fallback
+    if (!useWeb3Forms) {
+      success = await submitToEmailJS();
+      
+      // If EmailJS fails, try Web3Forms as fallback
+      if (!success) {
+        console.log('EmailJS failed, trying Web3Forms...');
+        success = await submitToWeb3Forms(form);
+        
+        if (success) {
+          setStatus({ 
+            type: 'success', 
+            message: 'Message sent .' 
+          });
+        } else {
+          setStatus({ 
+            type: 'error', 
+            message: 'Both services failed. Please try again or contact me directly via email.' 
+          });
+        }
+      } else {
         setStatus({ type: 'success', message: 'Thank you! I\'ll get back to you soon.' });
-        setForm({ name: '', email: '', message: '' });
-      })
-      .catch((error) => {
-        setLoading(false);
+      }
+    } else {
+      // Use only Web3Forms
+      success = await submitToWeb3Forms(form);
+      if (success) {
+        setStatus({ type: 'success', message: 'Thank you! I\'ll get back to you soon.' });
+      } else {
         setStatus({ type: 'error', message: 'Something went wrong. Please try again.' });
-        console.error('EmailJS error:', error);
-      });
+      }
+    }
+
+    if (success) {
+      setForm({ name: '', email: '', message: '' });
+    }
+    
+    setLoading(false);
   };
 
   const contactInfo = [
@@ -98,7 +154,6 @@ const Contact = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {/* Added Suspense to prevent crashing while texture loads */}
             <Suspense fallback={null}>
               <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
                 <ambientLight intensity={0.8} />
@@ -124,7 +179,7 @@ const Contact = () => {
                 <input
                   type="text"
                   id="name"
-                  name="name" // Matches {{name}} in EmailJS template
+                  name="name"
                   value={form.name}
                   onChange={handleChange}
                   placeholder="Enter your name"
@@ -137,7 +192,7 @@ const Contact = () => {
                 <input
                   type="email"
                   id="email"
-                  name="email" // Matches {{email}} in EmailJS template
+                  name="email"
                   value={form.email}
                   onChange={handleChange}
                   placeholder="Enter your email"
@@ -149,7 +204,7 @@ const Contact = () => {
                 <label htmlFor="message">Your Message</label>
                 <textarea
                   id="message"
-                  name="message" // Matches {{message}} in EmailJS template
+                  name="message"
                   rows="5"
                   value={form.message}
                   onChange={handleChange}
@@ -178,6 +233,18 @@ const Contact = () => {
                   'Send Message'
                 )}
               </button>
+
+              {/* Optional: Manual fallback toggle (hidden by default, can be shown for debugging) */}
+              {process.env.NODE_ENV === 'development' && (
+                <button
+                  type="button"
+                  onClick={() => setUseWeb3Forms(!useWeb3Forms)}
+                  style={{ marginTop: '10px', fontSize: '12px' }}
+                  className="submit-btn"
+                >
+                  {/* Switch to {useWeb3Forms ? 'EmailJS' : 'Web3Forms'} */}
+                </button>
+              )}
             </form>
           </motion.div>
         </div>

@@ -8,7 +8,7 @@
 }
 
 .projects-container {
-  max-width: 1300px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -102,10 +102,27 @@
   backdrop-filter: blur(3px);
 }
 
+/* New: centers the inner card */
 .overlay-content {
-  text-align: center;
-  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+
+/* Inner card with rounded rectangle */
+.overlay-card {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  padding: 25px 20px;
+  width: 100%;
+  max-width: 280px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
 }
 
 .project-name {
@@ -126,17 +143,18 @@
   margin-right: auto;
 }
 
-/* Project Links */
+/* Project Links - stacked vertically */
 .project-links {
   display: flex;
-  gap: 15px;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
 }
 
 .project-link {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 10px 20px;
   background: rgba(255, 255, 255, 0.2);
@@ -148,6 +166,8 @@
   font-weight: 500;
   backdrop-filter: blur(5px);
   transition: background 0.3s ease;
+  width: 100%;
+  max-width: 200px;
 }
 
 .project-link:hover {
@@ -224,14 +244,28 @@
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 20px;
+    justify-content: center;
   }
   
   .project-card {
     height: 300px;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
   }
   
   .project-name {
     font-size: 1.5rem;
+  }
+
+  .projects-section {
+    padding: 60px 30px;
+  }
+
+  /* Make inner card slightly smaller on mobile */
+  .overlay-card {
+    max-width: 240px;
+    padding: 20px 15px;
   }
 }
 
