@@ -60,7 +60,7 @@ const Projects = () => {
       image: project8,
       description: 'YouTube UI clone with video search and responsive design.',
       siteLink: 'https://eclectic-cocada-c9ea57.netlify.app/',
-      codeLink: 'https://github.com/dawit708/myyoutube-clone',
+      codeLink: 'https://github.com/dawit708/youtube-clone-website',
     },
     {
       id: 7,
