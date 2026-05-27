@@ -8,6 +8,8 @@ import project9 from '../assets/project9.png';
 import project10 from '../assets/project10.png';
 import project11 from '../assets/project11.png';
 import project12 from '../assets/project12.png';
+import project20 from '../assets/project20.jpg';
+import project21 from '../assets/project21.jpg';
 import './Projects.css';
 
 const Projects = () => {
@@ -70,6 +72,22 @@ const Projects = () => {
       siteLink: 'https://calculter1.netlify.app/',
       codeLink: 'https://github.com/dawit708/apple-calculater',
     },
+    {
+      id: 8,
+      name: 'Enterprise Resource Planning (ERP) System',
+      image: project20,
+      description: 'A comprehensive ERP system built with modern web technologies.',
+      siteLink: 'http://localhost:5173/',
+      codeLink: 'https://github.com/dawit708/employee-registrations-systems-in-javafx',
+    },
+     {
+      id: 9,
+      name: 'Evangadi form action in Backend',
+      image: project21,
+      description: 'Backend implementation of form actions for Evangadi, including data processing and API integration.',
+      siteLink: 'http://localhost:5173/',
+      codeLink: 'https://github.com/dawit708/Evangadi-backend-Form-action',
+    }
   ];
 
   return (

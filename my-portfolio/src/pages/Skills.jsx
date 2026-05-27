@@ -18,6 +18,8 @@ import {
   SiMongodb,
   SiMysql,
   SiFirebase,
+  SiPostcss,
+  SiPostgresql,
 } from 'react-icons/si';
 import { VscJson } from 'react-icons/vsc';
 import './Skills.css';
@@ -35,7 +37,7 @@ const skillsData = [
   { name: 'jQuery', icon: <SiJquery />, proficiency: 75 },
   { name: 'Node.js', icon: <FaNodeJs />, proficiency: 80 },
   { name: 'Express', icon: <SiExpress />, proficiency: 75 },
-  { name: 'MongoDB', icon: <SiMongodb />, proficiency: 75 },
+  { name: 'MongoDB', icon: <SiPostgresql />, proficiency: 75 },
   { name: 'PHP', icon: <FaPhp />, proficiency: 70 },
   { name: 'API', icon: <FaDatabase />, proficiency: 80 },
   { name: 'MySQL', icon: <SiMysql />, proficiency: 75 },
